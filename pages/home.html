@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>
+        Portal S.I.P
+    </title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="/../PortalSip/Images/icon.png">
+            </div>
+
+            <span class="logo_name">Portal S.I.P</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="home.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">HOME</span>
+                    </a></li>
+                <li><a href="adm.html">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Administrativo</span>
+                    </a></li>
+                <li><a href="analise.html">
+                        <i class="uil uil-check"></i>
+                        <span class="link-name">Analise</span>
+                    </a></li>
+                <li><a href="usuarios.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">Usuários</span>
+                    </a></li>
+                <li><a href="superUser.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">Funcionários</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Escuro</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+
+            <div class="search-box">
+                <!--
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+                 -->
+            </div>
+
+
+            
+                <img src="images/profile.jpg" alt="">
+                
+                <p>Bem-Vindo: <p id="nomeuser">--</p></p>
+
+
+
+        </div>
+
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-estate"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+
+
+
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Total de Chamados</span>
+                        <span id="total" class="number">-</span>
+                    </div>
+                    <div class="box box2">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Chamados Ativos</span>
+                        <span id="pendentes" class="number">-</span>
+                    </div>
+                    <div class="box box3">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Chamados Concluidos</span>
+                        <span id="concluidos" class="number">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity">
+                <iframe class="mapa"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d754.2613677780338!2d-51.98651917082924!3d-26.512148798882347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x41d93b0b06193e01!2zMjbCsDMwJzQzLjciUyA1McKwNTknMDkuNSJX!5e1!3m2!1spt-BR!2sbr!4v1660323669822!5m2!1spt-BR!2sbr"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+    </section>
+
+
+</body>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.mask.min.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.popper.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/../PortalSip/scripts/validaLogin.js"></script>
+<script src="/../PortalSip/scripts/script.js"></script>
+
+</html>

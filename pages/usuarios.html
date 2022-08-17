@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/../PortalSip/estilos/records.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>
+        Portal S.I.P - Usuários
+    </title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="/../PortalSip/Images/icon.png">
+            </div>
+
+            <span class="logo_name">Portal S.I.P</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="home.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Dahsboard</span>
+                    </a></li>
+                <li><a href="adm.html">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Administrativo</span>
+                    </a></li>
+                <li><a href="analise.html">
+                        <i class="uil uil-check"></i>
+                        <span class="link-name">Analise</span>
+                    </a></li>
+                <li><a href="usuarios.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">USUÁRIOS</span>
+                    </a></li>
+                <li><a href="superUser.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">Funcionários</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Escuro</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+
+
+
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+
+            <div class="search-box">
+                <!--
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+                 -->
+            </div>
+
+
+            <!--
+                <img src="images/profile.jpg" alt="">
+            -->
+        </div>
+
+        <div class="dash-content">
+
+
+            <div class="boxes">
+            </div>
+
+            <div class="title">
+                <i class="uil uil-user"></i>
+                <span class="text">Usuários: <span class="number" id="usuarios">_</span></span>
+            </div>
+
+            <div class="activity-data">
+                <!-- essa é a tebela que é criada através do javascritp no main.js-->
+                <table id="tb_dados" class="display tb_example" width="100%"></table>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.mask.min.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.popper.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/../PortalSip/scripts/usuario.js"></script>
+
+</html>

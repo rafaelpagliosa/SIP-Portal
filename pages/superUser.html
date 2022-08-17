@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/../PortalSip/estilos/records.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/superUser.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/superUserModal.css">
+
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <title>
+        Portal S.I.P - Funcionário
+    </title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-name">
+            <div class="logo-image">
+                <img src="/../PortalSip/Images/icon.png">
+            </div>
+
+            <span class="logo_name">Portal S.I.P</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li><a href="home.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name">Home</span>
+                    </a></li>
+                <li><a href="adm.html">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="link-name">Administrativo</span>
+                    </a></li>
+                <li><a href="analise.html">
+                        <i class="uil uil-check"></i>
+                        <span class="link-name">Analise</span>
+                    </a></li>
+                <li><a href="usuarios.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">Usuários</span>
+                    </a></li>
+                <li><a href="usuarios.html">
+                        <i class="uil uil-user"></i>
+                        <span class="link-name">FUNCIONÁRIOS</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+                <li><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span class="link-name">Logout</span>
+                    </a></li>
+
+                <li class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Escuro</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+
+
+
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+
+            <div class="search-box">
+                <!--
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+                 -->
+            </div>
+
+
+            <!--
+                <img src="images/profile.jpg" alt="">
+            -->
+        </div>
+
+        <div class="dash-content">
+
+
+            <div class="boxes">
+            </div>
+
+            <div class="title">
+                <i class="uil uil-user"></i>
+                <span class="text">Administradores: <span class="number" id="usuarios">_</span></span>
+
+
+                <div><button type="button" class="button blue mobile btngrande btncad" id="cadastrarCliente">Novo
+                        Funcionário</button>
+                </div>
+
+            </div>
+
+
+
+            <div class="activity-data">
+                <!-- essa é a tebela que é criada através do javascritp no main.js-->
+                <table id="tb_dados" class="display tb_example" width="100%"></table>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Novo Funcionário</h2>
+                <div class="modal-close" id="" onclick="fechaModal()">X</div>
+            </header>
+
+
+            <form id="form" class="modal-form">
+                <input type="text" id="nome" class="modal-field" placeholder="Nome Completo" required>
+
+                <select name="area" id="area" class="modal-field" required>
+                    <option value="nd" disabled selected>Selecione a área</option>
+                    <option value="Gestão">Gestão</option>
+                    <option value="Campo">Campo</option>
+                    <option value="Finanças">Finanças</option>
+                </select>
+
+                <input type="text" id="cpf" class="modal-field" placeholder="CPF"
+                    onkeypress="$(this).mask('000.000.000-00');" onblur="validaCPF()" required>
+                <input type="text" id="contato" class="modal-field" placeholder="Contato"
+                    onkeypress="$(this).mask('(00)00000-0000');" required>
+                <input type="text" id="cep" class="modal-field" placeholder="Cep" onkeypress="$(this).mask('00000000');"
+                    autocomplete="off" required>
+                <input type="text" id="endereco" class="modal-field" placeholder="Endereço" required>
+                <input type="text" id="bairro" class="modal-field" placeholder="Bairro" required>
+                <input type="text" id="cidade" class="modal-field" placeholder="Cidade" required>
+
+                <input type="text" id="obs" class="modal-field" placeholder="Observação" required>
+            </form>
+
+            <footer class="modal-footer">
+                <button id="salvar" class="button green" onclick="salvar()">Salvar</button>
+                <button id="cancelar" class="button red" onclick="fechaModal()">Cancelar</button>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.mask.min.js"></script>
+<script src="/../PortalSip/bibliotecas/jquery.popper.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/../PortalSip/scripts/superUser.js"></script>
+
+</html>

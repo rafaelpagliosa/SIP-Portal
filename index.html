@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>S.I.P - Login</title>
+    <link rel="icon" href="/../PortalSip/Images/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/../PortalSip/estilos/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="content first-content">
+            <div class="first-column">
+                <h2 class="title title-primary">Bem-Vindo!</h2>
+                <p class="description description-primary">S.I.P Portal</p>
+                <p class="description description-primary">Espaço Administrador</p>
+            </div>
+            <div class="second-column">
+                <h2 class="title title-second">Login</h2>
+                <div class="social-media">
+                    <ul class="list-social-media">
+                    </ul>
+                </div>
+                <p class="description description-second">Preencha os campos com seus dados de Login</p>
+
+
+                <div class="form">
+                    <label class="label-input" for="">
+                        <i class="far fa-envelope icon-modify"></i>
+                        <input type="text" id="email" name="email" placeholder="E-mail" />
+                    </label>
+
+                    <label class="label-input" for="">
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input type="password" id="password" name="password" placeholder="Password" />
+                    </label>
+                    <input type="submit" id='login' name="login" onclick="logar()" value="Login" />
+                </div>
+
+                <p id="aviso">Credenciais inválidas, tente novamente!</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+    import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDnrnf7XGJ7WIlxdvdhn3AyUMVQBoYIURo",
+        authDomain: "authentication-adm.firebaseapp.com",
+        projectId: "authentication-adm",
+        storageBucket: "authentication-adm.appspot.com",
+        messagingSenderId: "131427913576",
+        appId: "1:131427913576:web:2c20f8041572173c1810dd"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    login.addEventListener('click', (e) => {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                const dt = new Date();
+                update(ref(database, 'users/' + user.uid), {
+                    last_login: dt,
+                })
+                window.location.assign("/PortalSip/pages/home.html");
+                localStorage.setItem("usuario", user.uid);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                document.getElementById('aviso').style.display = 'block';
+                document.getElementById('password').value = '';
+                document.getElementById('email').value = '';
+                //window.location.assign("/PortalSip");
+
+            });
+    });
+</script>
+
+</html>
