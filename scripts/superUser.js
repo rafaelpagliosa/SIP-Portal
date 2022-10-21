@@ -1,43 +1,13 @@
 var valorUsuario;
-
-
-//modo black
-const body = document.querySelector("body"),
-    modeToggle = body.querySelector(".mode-toggle");
-sidebar = body.querySelector("nav");
-sidebarToggle = body.querySelector(".sidebar-toggle");
-
-let getMode = localStorage.getItem("mode");
-if (getMode && getMode === "dark") {
-    body.classList.toggle("dark");
-}
-
-let getStatus = localStorage.getItem("status");
-if (getStatus && getStatus === "close") {
-    sidebar.classList.toggle("close");
-}
-
-modeToggle.addEventListener("click", () => {
-    body.classList.toggle("dark");
-    if (body.classList.contains("dark")) {
-        localStorage.setItem("mode", "dark");
-    } else {
-        localStorage.setItem("mode", "light");
-    }
-});
-
-sidebarToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("close");
-    if (sidebar.classList.contains("close")) {
-        localStorage.setItem("status", "close");
-    } else {
-        localStorage.setItem("status", "open");
-    }
-})
+var valorTodas;
+var posicao;
 
 
 
-//configurações de endereço de banco firestore database Firebase
+
+
+
+//Banco 1 padrao das tasks
 var firebaseConfig = {
     apiKey: "AIzaSyDtTxUWqB07R-ZvIA6V6SRvm1vbOuAMS2s",
     authDomain: "authentication-7808c.firebaseapp.com",
@@ -47,14 +17,45 @@ var firebaseConfig = {
     messagingSenderId: "1040322467580",
     appId: "1:1040322467580:web:4e19c3a14d5a5b37932979"
 };
-
-// inicialização do banco Firebase
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore()
-const database = firebase.firestore();
+
+//Banco 2 padrao dos usuários
+var secondaryAppConfig = {
+    apiKey: "AIzaSyDnrnf7XGJ7WIlxdvdhn3AyUMVQBoYIURo",
+    authDomain: "authentication-adm.firebaseapp.com",
+    projectId: "authentication-adm",
+    storageBucket: "authentication-adm.appspot.com",
+    messagingSenderId: "131427913576",
+    appId: "1:131427913576:web:2c20f8041572173c1810dd"
+};
+const secondaryApp = firebase.initializeApp(secondaryAppConfig, "secondary");
+const data2 = secondaryApp.firestore()
+
+
+
+function validaUsuarioLogado() {
+    const usuario = localStorage.getItem('usuario');
+    console.log(usuario);
+    if (usuario == null || usuario == "") {
+        window.location.assign("/PortalSip");
+    } else {
+        //document.getElementById('iduser').innerHTML = usuario;
+        data2.collection("SuperUser").where("iduser", "==", usuario).onSnapshot((query) => {
+            var list = [];
+            query.forEach((doc) => {
+                list.push({ ...doc.data(), id: doc.id });
+            });
+            const firstElement = list.shift();
+            document.getElementById('nomeuser').innerHTML = firstElement.nome;
+            //document.getElementById('areauser').innerHTML = firstElement.area;
+            console.log(list)
+        });
+    }
+}
 
 function contaUsuarios() {
-    firestore.collection("Users").onSnapshot((query) => {
+    data2.collection("SuperUser").onSnapshot((query) => {
         var list = [];
         query.forEach((doc) => {
             list.push({ ...doc.data(), id: doc.id });
@@ -65,16 +66,15 @@ function contaUsuarios() {
     return valorTodas;
 }
 
-
 function buscarTotalUser() {
-    firestore.collection("Users").orderBy("nome", "asc").onSnapshot((query) => {
+    data2.collection("SuperUser").orderBy("posicao", "desc").onSnapshot((query) => {
         var list = [];
         query.forEach((doc) => {
             list.push({ ...doc.data(), id: doc.id });
         });
         var dataSet = [];
         $.each(list, function (index, data) {
-            dataSet.push([data.nome, data.cpf, data.email, data.contato]);
+            dataSet.push([data.posicao, data.id, data.nome, data.area, data.email, data.contato, data.iduser]);
         });
 
         //criação da tabela via javascript
@@ -85,120 +85,53 @@ function buscarTotalUser() {
             info: false,
             bDestroy: true,
             columns: [
+                { title: 'Nº' },
+                { title: 'Id' },
                 { title: 'Nome' },
-                { title: 'CPF' },
+                { title: 'area' },
                 { title: 'Email' },
                 { title: 'Contato' },
+                { title: 'Id User' },
             ]
         });
     });
 }
 
-
-$(document).ready(function () {
-    buscarTotalUser();
-    contaUsuarios();
-});
-
-
-//função para validar se a mensagem tem palavras improprias
-function validaMsg() {
-    var verifica0;
-    var verifica1;
-    var verifica2;
-    var verifica3;
-
-    const frase = document.getElementById('msg').value;
-    console.log(verifica0 = frase.indexOf("bolsonaro"));
-    console.log(verifica1 = frase.indexOf("Bolsonaro"));
-    console.log(verifica2 = frase.indexOf("lula"));
-    console.log(verifica3 = frase.indexOf("Lula"));
-
-    if (verifica0 >= 0 || verifica1 >= 0 || verifica2 >= 0 || verifica3 >= 0) {
-        const frase = document.getElementById('msg').value = '';
-        console.log("Palavras Inválidas");
-    } else {
-        console.log("Ok");
-    }
-
+function validaPosicaoProxLivre() {
+    data2.collection("SuperUser").onSnapshot((query) => {
+        var list = [];
+        query.forEach((doc) => {
+            list.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(list.length)
+        //posição recebe o tamanho do banco de dados (quantidade) e incrementa + 1 para ser a proxima posição a ser cadastrada
+        posicao = list.length + 1;
+    });
+    return posicao;
 }
 
-
-
-//função para salvar as mensagens no banco de dados
 function salvar() {
-    //recupera os dados do formulario HTML
-    var remetente = document.getElementById('remetente').value;
-    var curso_remetente = document.getElementById('curso_remetente').value;
-    var destinatario = document.getElementById('destinatario').value;
-    var curso_destinatario = document.getElementById('curso_destinatario').value;
-    var tipo = document.getElementById('tipo').value;
-    var status = "pendente";
-    var msg = document.getElementById('msg').value;
-
-    //faz uma verificação se todos campos foram preenchidos
-    if (remetente != "" && curso_remetente != "" && curso_remetente != "nd" && destinatario != "" && destinatario != "nd" && curso_destinatario != "" && status != "" && msg != "" && tipo != "" && tipo != "nd") {
-        firestore.collection("Mensagens").add({
-            remetente: document.getElementById('remetente').value,
-            curso_remetente: document.getElementById('curso_remetente').value,
-            destinatario: document.getElementById('destinatario').value,
-            curso_destinatario: document.getElementById('curso_destinatario').value,
-            tipo: document.getElementById('tipo').value,
-            status: "pendente",
-            msg: document.getElementById('msg').value,
-            posicao: posicao
-        })
-
-        var nameRemetente = document.getElementById('remetente').value;
-
-        //executa a função para saber a hora de exebição
-        hora();
-
-        //alert informando o sucesso no cadastro + informando a hora de exebição
-        alert("" + "\n" + nameRemetente + " " + "sua mensagem foi salva com sucesso! " + "\n" + "Ela será exibida as " + horasExib + "h" + minutosExib + "⏰" + "\n" + "\n" + "Obrigado");
-
-        //limpa os campos para a proxima mensagens
-        document.getElementById('remetente').value = '';
-        document.getElementById('curso_remetente').value = 'nd';
-        document.getElementById('destinatario').value = '';
-        document.getElementById('curso_destinatario').value = 'nd';
-        document.getElementById('msg').value = '';
-        document.getElementById('tipo').value = 'nd',
-            document.getElementById('modal').classList.remove('active');
-
-    }
-    //else para caso algum campo não seja preenchido
-    else {
-        alert("Preencha todos os Campos Obrigatórios");
-
-    }
+    validaPosicaoProxLivre();
+    data2.collection("SuperUser").add({
+        nome: document.getElementById('nome').value,
+        area: document.getElementById('area').value,
+        cpf: document.getElementById('cpf').value,
+        contato: document.getElementById('contato').value,
+        endereco: document.getElementById('endereco').value,
+        bairro: document.getElementById('bairro').value,
+        cidade: document.getElementById('cidade').value,
+        email: document.getElementById('email').value,
+        posicao: posicao,
+        iduser: "pendente"
+    }).then(() => {
+        console.log("Document successfully written!");
+        document.getElementById('modal').classList.remove('active');
+        alert(codigo)
+    }).catch((error) => {
+        console.error("Error writing document: ", error);
+    });
 }
 
-
-
-//Eventos e ações javascript para o modal de cadastro de mensagens
-const clearFields = () => {
-    const fields = document.querySelectorAll('.modal-field')
-    fields.forEach(field => field.value = "")
-    document.getElementById('remetente').dataset.index = 'new'
-}
-'use strict'
-const openModal = () => document.getElementById('modal')
-    .classList.add('active')
-
-const closeModal = () => {
-    clearFields()
-    document.getElementById('modal').classList.remove('active')
-}
-
-function fechaModal() {
-    document.getElementById('modal').classList.remove('active');
-}
-document.getElementById('cadastrarCliente').addEventListener('click', openModal)
-document.getElementById('cancelar').addEventListener('click', closeModal)
-
-
-//funcoes do formulario modal
 function validaCPF() {
     if (valida_cpf(document.getElementById('cpf').value)) {
         document.getElementById('cpf').style.borderColor = 'green';
@@ -252,6 +185,10 @@ function valida_cpf(cpfinput) {
     }
 }
 
+function deslogar() {
+    window.location.assign("/PortalSip");
+    localStorage.setItem("usuario", "deslogado");
+}
 
 function buscaCep() {
     let cep = $("#cep").val().replace("-", "");
@@ -285,3 +222,67 @@ function buscaCep() {
 $("#cep").keyup(function () {
     buscaCep();
 });
+
+
+//Eventos e ações javascript para o modal de cadastro de mensagens
+const clearFields = () => {
+    const fields = document.querySelectorAll('.modal-field')
+    fields.forEach(field => field.value = "")
+    document.getElementById('remetente').dataset.index = 'new'
+}
+'use strict'
+const openModal = () => document.getElementById('modal')
+    .classList.add('active')
+
+const closeModal = () => {
+    clearFields()
+    document.getElementById('modal').classList.remove('active')
+}
+
+function fechaModal() {
+    document.getElementById('modal').classList.remove('active');
+}
+document.getElementById('cadastrarCliente').addEventListener('click', openModal)
+document.getElementById('cancelar').addEventListener('click', closeModal)
+
+
+$(document).ready(function () {
+    validaUsuarioLogado();
+    buscarTotalUser();
+    contaUsuarios();
+});
+
+
+//modo black
+const body = document.querySelector("body"),
+    modeToggle = body.querySelector(".mode-toggle");
+sidebar = body.querySelector("nav");
+sidebarToggle = body.querySelector(".sidebar-toggle");
+
+let getMode = localStorage.getItem("mode");
+if (getMode && getMode === "dark") {
+    body.classList.toggle("dark");
+}
+
+let getStatus = localStorage.getItem("status");
+if (getStatus && getStatus === "close") {
+    sidebar.classList.toggle("close");
+}
+
+modeToggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    if (body.classList.contains("dark")) {
+        localStorage.setItem("mode", "dark");
+    } else {
+        localStorage.setItem("mode", "light");
+    }
+});
+
+sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+    if (sidebar.classList.contains("close")) {
+        localStorage.setItem("status", "close");
+    } else {
+        localStorage.setItem("status", "open");
+    }
+})

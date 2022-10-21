@@ -6,10 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/../PortalSip/Images/icon.png" type="image/x-icon" />
 
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="/../PortalSip/estilos/records.css">
     <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/modal.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/graficos/grafico-pie.css">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -21,7 +24,7 @@
 
 <body>
     <nav>
-        <div class="logo-name">
+        <div title="S.I.P Solução em Iluminação Pública" class="logo-name">
             <div class="logo-image">
                 <img src="/../PortalSip/Images/icon.png">
             </div>
@@ -31,38 +34,44 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="home.html">
+                <li title="Home"><a href="home.html">
                         <i class="uil uil-estate"></i>
-                        <span class="link-name">Dahsboard</span>
+                        <span class="link-name">HOME</span>
                     </a></li>
-                <li><a href="adm.html">
-                        <i class="uil uil-files-landscapes"></i>
+                <li title="Administração"><a href="adm.html">
+                        <i class="uil uil-bag-alt"></i>
                         <span class="link-name">Administrativo</span>
                     </a></li>
-                <li><a href="analise.html">
-                        <i class="uil uil-check"></i>
-                        <span class="link-name">Analise</span>
+                <li title="Dashboard"><a href="analise.html">
+                        <i class="uil uil-chart-line"></i>
+                        <span class="link-name">Dashboard</span>
                     </a></li>
-                <li><a href="usuarios.html">
-                        <i class="uil uil-user"></i>
-                        <span class="link-name">USUÁRIOS</span>
+                <li title="Usuários"><a>
+                        <i class="uil uil-user-square"></i>
+                        <span class="link-name"><b>USUÁRIOS</b></span>
                     </a></li>
-                <li><a href="superUser.html">
-                        <i class="uil uil-user"></i>
+                <li title="Funcionários"><a href="superUser.html">
+                        <i class="uil uil-user-plus"></i>
                         <span class="link-name">Funcionários</span>
                     </a></li>
             </ul>
 
             <ul class="logout-mode">
-                <li><a href="#">
-                        <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
+
+                <li title="Perfil"><a href="perfil.html">
+                        <i class="uil-user-circle"></i>
+                        <span class="link-name" id="nomeuser"></span>
                     </a></li>
 
-                <li class="mode">
+                <li title="Logout"><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span onclick="deslogar()" class="link-name">Logout</span>
+                    </a></li>
+
+                <li title="Modo Dark" class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
-                        <span class="link-name">Modo Escuro</span>
+                        <span class="link-name">Modo Dark</span>
                     </a>
 
                     <div class="mode-toggle">
@@ -70,13 +79,11 @@
                     </div>
                 </li>
             </ul>
+
         </div>
     </nav>
 
     <section class="dashboard">
-
-
-
         <div class="top">
             <i class="uil uil-bars sidebar-toggle"></i>
 
@@ -87,11 +94,6 @@
                 <input type="text" placeholder="Search here...">
                  -->
             </div>
-
-
-            <!--
-                <img src="images/profile.jpg" alt="">
-            -->
         </div>
 
         <div class="dash-content">
@@ -105,12 +107,90 @@
                 <span class="text">Usuários: <span class="number" id="usuarios">_</span></span>
             </div>
 
+
             <div class="activity-data">
                 <!-- essa é a tebela que é criada através do javascritp no main.js-->
-                <table id="tb_dados" class="display tb_example" width="100%"></table>
+                <div class="card shadow mb-4 ajuste2">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Usuários (Municipes):
+                        </h6>
+                    </div>
+                    <div class="activity-data">
+                        <!-- essa é a tebela que é criada através do javascritp no main.js-->
+                        <table id="tb_dados" class="table table-striped" width="100%"></table>
+                    </div>
+                </div>
+
             </div>
+
         </div>
+        <span id="infoSistema" class="link-name">&copy Copyright 2022 S.I.P Solução em Iluminação Pública</span>
     </section>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Municipe:</h2>
+                <div class="modal-close" id="" onclick="fechaModal()">X</div>
+            </header>
+
+            <table class="tb_protocolo">
+                <tr>
+                    <td>
+                        <img id="img_profile" src="/../PortalSip/Images/profile2.png">
+                    </td>
+                    <td>
+                        <table id="tb_profile">
+                            <tr>
+                                <td class="modal_txt_dados">ID: <span id="textID"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Nome: <span id="textNome"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">E-mail: <span id="textEmail"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Contato: <span id="textContato"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Qtd de Chamados: <span id="textQtda"></span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+
+            <!--
+            <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div class="card p-4">
+                    <div class=" image d-flex flex-column justify-content-center align-items-center"> <button
+                            class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100"
+                                width="100" /></button> <span class="name mt-3">Eleanor Pena</span> <span
+                            class="idd">@eleanorpena</span>
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span
+                                class="idd1">Oxc4c16a645_b21a</span> <span><i class="fa fa-copy"></i></span> </div>
+                        <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span
+                                class="number">1069 <span class="follow">Followers</span></span> </div>
+                        <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Edit Profile</button> </div>
+                        <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and
+                                digital artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night.
+                            </span> </div>
+                        <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
+                            <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span>
+                            <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span>
+                        </div>
+                        <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div>
+                    </div>
+                </div>
+            </div>
+-->
+            <footer class="modal-footer" onclick="fechaModal()">
+                <button id="cancelar" class="button blue" onclick="fechaModal()">Sair</button>
+            </footer>
+        </div>
+    </div>
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>

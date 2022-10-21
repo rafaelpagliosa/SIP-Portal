@@ -1,0 +1,35 @@
+.ajuste {
+    margin-top: 7% !important;
+}
+
+.ajuste2 {
+    margin-left: 1%;
+    width: 48%;
+}
+
+.dash-content {
+    margin-top: 6% !important;
+}
+
+nav#perfil {
+    width: 13% !important;
+    margin-top: 2.1%;
+    height: 7vh !important;
+    border-radius: 12px !important;
+    background-color: rgb(64, 107, 145);
+}
+
+.top {
+    height: 8vh !important;
+}
+
+div#ajusteUrgencia {
+    width: 100%;
+}
+
+div#ajustemapa {
+    width: 100%;
+}
+iframe{
+    height: 25vh;
+}

@@ -552,3 +552,20 @@ input:-webkit-autofill {
         width: 100%;
     }
 }
+
+.content {
+    width: 35% !important;
+}
+
+.form input {
+    width: 80% !important;
+    margin-left: 10% !important;
+}
+
+label {
+    border-radius: 12px;
+}
+
+input {
+    border-radius: 12px;
+}

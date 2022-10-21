@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/../PortalSip/Images/icon.png" type="image/x-icon" />
+
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="/../PortalSip/estilos/records.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/modal.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/adm.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/graficos/grafico-pie.css">
+
+    <title>
+        Portal S.I.P - ADM
+    </title>
+</head>
+
+<body>
+    <nav>
+        <div title="S.I.P Solução em Iluminação Pública" class="logo-name">
+            <div class="logo-image">
+                <img src="/../PortalSip/Images/icon.png">
+            </div>
+
+            <span class="logo_name">Portal S.I.P</span>
+        </div>
+
+        <div class="menu-items">
+            <ul class="nav-links">
+                <li title="Home"><a href="home.html">
+                        <i class="uil uil-estate"></i>
+                        <span class="link-name"><b>HOME</b></span>
+                    </a></li>
+                <li title="Administrativo"><a href="adm.html">
+                        <i class="uil uil-bag-alt"></i>
+                        <span class="link-name">Administrativo</span>
+                    </a></li>
+                <li title="Dashboard"><a href="analise.html">
+                        <i class="uil uil-chart-line"></i>
+                        <span class="link-name">Dashboard</span>
+                    </a></li>
+                <li title="Usuários"><a href="usuarios.html">
+                        <i class="uil uil-user-square"></i>
+                        <span class="link-name">Usuários</span>
+                    </a></li>
+                <li title="Funcionários"><a href="superUser.html">
+                        <i class="uil uil-user-plus"></i>
+                        <span class="link-name">Funcionários</span>
+                    </a></li>
+            </ul>
+
+            <ul class="logout-mode">
+
+                <li title="Perfil"><a href="perfil.html">
+                        <i class="uil-user-circle"></i>
+                        <span class="link-name" id="nomeuser"></span>
+                    </a></li>
+
+                <li title="Logout"><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span onclick="deslogar()" class="link-name">Logout</span>
+                    </a></li>
+
+                <li title="Modo Dark" class="mode">
+                    <a href="#">
+                        <i class="uil uil-moon"></i>
+                        <span class="link-name">Modo Dark</span>
+                    </a>
+
+                    <div class="mode-toggle">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+
+
+            <div class="search-box">
+                <!--
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+                 -->
+            </div>
+        </div>
+
+        <div class="dash-content">
+
+
+            <div class="boxes">
+
+            </div>
+
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Todos os relatos concluidos: <span class="number" id="pendentes">-</span></span>
+            </div>
+
+
+            <div class="activity-data">
+                <!-- essa é a tebela que é criada através do javascritp no main.js-->
+
+                <div class="card shadow mb-4 ajuste2">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Relatos Concluidos
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <table id="tb_dados" class="table table-striped" width="100%"></table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <span id="infoSistema" class="link-name">&copy Copyright 2022 S.I.P Solução em Iluminação Pública</span>
+    </section>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Protocolo Detalhado</h2>
+                <div class="modal-close" id="" onclick="fechaModal()">X</div>
+            </header>
+            <p class="modal_txt_protocolo">Protocolo: <span id="textProtocolo"></span></p>
+
+            <table class="tb_protocolo">
+                <tr>
+                    <td><img class="mapa" id="image"></iframe></td>
+
+                    <td><iframe class="mapa" id="map" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <table id="tb_info">
+                            <tr>
+                                <td class="modal_txt_dados">Solicitação em: <span id="textData"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Status: <span id="textStatus"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Tipo: <span id="textTipo"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Urgencia: <span id="textUrgencia"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Descrição: <span id="textDescricao"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Baixa realizada por: <span id="textFuncionario"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Baixa realizada em: <span id="textBaixa"></span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <footer class="modal-footer">
+                <button id="cancelar" class="button blue" onclick="fechaModal()">Sair</button>
+            </footer>
+        </div>
+    </div>
+
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-storage.js"></script>
+
+<script src="/../PortalSip/bibliotecas/jquery.js"></script>
+
+<script src="/../PortalSip/bibliotecas/jquery.mask.min.js"></script>
+
+<script src="/../PortalSip/bibliotecas/jquery.popper.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="/../PortalSip/scripts/concluidos.js"></script>
+
+</html>

@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="/../PortalSip/estilos/records.css">
     <link rel="stylesheet" href="/../PortalSip/estilos/style.css">
     <link rel="stylesheet" href="/../PortalSip/estilos/superUser.css">
+    <link rel="icon" href="/../PortalSip/Images/icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="/../PortalSip/estilos/superUserModal.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/usuario.css">
+    <link rel="stylesheet" href="/../PortalSip/estilos/graficos/grafico-pie.css">
 
     <!----===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -23,7 +26,7 @@
 
 <body>
     <nav>
-        <div class="logo-name">
+        <div title="S.I.P Solução em Iluminação Pública" class="logo-name">
             <div class="logo-image">
                 <img src="/../PortalSip/Images/icon.png">
             </div>
@@ -33,38 +36,44 @@
 
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="home.html">
+                <li title="Home"><a href="home.html">
                         <i class="uil uil-estate"></i>
                         <span class="link-name">Home</span>
                     </a></li>
-                <li><a href="adm.html">
-                        <i class="uil uil-files-landscapes"></i>
+                <li title="Administrativo"><a href="adm.html">
+                        <i class="uil uil-bag-alt"></i>
                         <span class="link-name">Administrativo</span>
                     </a></li>
-                <li><a href="analise.html">
-                        <i class="uil uil-check"></i>
-                        <span class="link-name">Analise</span>
+                <li title="Dashboard"><a href="analise.html">
+                        <i class="uil uil-chart-line"></i>
+                        <span class="link-name">Dashboard</span>
                     </a></li>
-                <li><a href="usuarios.html">
-                        <i class="uil uil-user"></i>
+                <li title="Usuários"><a href="usuarios.html">
+                        <i class="uil uil-user-square"></i>
                         <span class="link-name">Usuários</span>
                     </a></li>
-                <li><a href="usuarios.html">
-                        <i class="uil uil-user"></i>
-                        <span class="link-name">FUNCIONÁRIOS</span>
+                <li title="Funcionários"><a>
+                        <i class="uil uil-user-plus"></i>
+                        <span class="link-name"><b>FUNCIONÁRIOS</b></span>
                     </a></li>
             </ul>
 
             <ul class="logout-mode">
-                <li><a href="#">
-                        <i class="uil uil-signout"></i>
-                        <span class="link-name">Logout</span>
+
+                <li title="Perfil"><a href="perfil.html">
+                        <i class="uil-user-circle"></i>
+                        <span class="link-name" id="nomeuser"></span>
                     </a></li>
 
-                <li class="mode">
+                <li title="Logout"><a href="#">
+                        <i class="uil uil-signout"></i>
+                        <span onclick="deslogar()" class="link-name">Logout</span>
+                    </a></li>
+
+                <li title="Modo Dark" class="mode">
                     <a href="#">
                         <i class="uil uil-moon"></i>
-                        <span class="link-name">Modo Escuro</span>
+                        <span class="link-name">Modo Dark</span>
                     </a>
 
                     <div class="mode-toggle">
@@ -89,11 +98,6 @@
                 <input type="text" placeholder="Search here...">
                  -->
             </div>
-
-
-            <!--
-                <img src="images/profile.jpg" alt="">
-            -->
         </div>
 
         <div class="dash-content">
@@ -113,13 +117,24 @@
 
             </div>
 
-
-
             <div class="activity-data">
                 <!-- essa é a tebela que é criada através do javascritp no main.js-->
-                <table id="tb_dados" class="display tb_example" width="100%"></table>
+                <div class="card shadow mb-4 ajuste2">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Funcionários:
+                        </h6>
+                    </div>
+                    <div class="activity-data">
+                        <!-- essa é a tebela que é criada através do javascritp no main.js-->
+                        <table id="tb_dados" class="table table-striped" width="100%"></table>
+                    </div>
+                </div>
+
             </div>
+
+
         </div>
+        <span id="infoSistema" class="link-name">&copy Copyright 2022 S.I.P Solução em Iluminação Pública</span>
     </section>
 
 
@@ -151,7 +166,7 @@
                 <input type="text" id="bairro" class="modal-field" placeholder="Bairro" required>
                 <input type="text" id="cidade" class="modal-field" placeholder="Cidade" required>
 
-                <input type="text" id="obs" class="modal-field" placeholder="Observação" required>
+                <input type="text" id="email" class="modal-field" placeholder="E-mail" required>
             </form>
 
             <footer class="modal-footer">

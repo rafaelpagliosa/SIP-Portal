@@ -11,14 +11,20 @@
 :root {
     /* ===== Colors ===== */
     --primary-color: #0E4BF1;
+    --primary-card-color: #f8f9fc;
     --panel-color: #FFF;
+    --panel-nav-color: #FFF;
+    --panel-card-color: #FFF;
     --text-color: #000;
+    --text-card-color: #4e73df;
+    --text-modal-color: #000;
     --black-light-color: #707070;
     --border-color: #e6e5e5;
+    --color-fundo-modal: #fff;
     --toggle-color: #DDD;
     --box1-color: #4DA3FF;
     --box2-color: #FEF401;
-    --box3-color: #E7D1FC;
+    --box3-color: #50cc16;
     --title-icon-color: #fff;
 
     /* ====== Transition ====== */
@@ -34,10 +40,16 @@ body {
 
 body.dark {
     --primary-color: #3A3B3C;
+    --primary-card-color: #3A3B3C;
     --panel-color: #242526;
+    --panel-nav-color: #242526;
+    --panel-card-color: #242526;
     --text-color: #CCC;
+    --text-modal-color: #CCC;
+    --text-card-color: #CCC;
     --black-light-color: #CCC;
     --border-color: #4D4C4C;
+    --color-fundo-modal: #4D4C4C;
     --toggle-color: #FFF;
     --box1-color: #3A3B3C;
     --box2-color: #3A3B3C;
@@ -76,7 +88,7 @@ nav {
     height: 100%;
     width: 250px;
     padding: 10px 14px;
-    background-color: var(--panel-color);
+    background-color: var(--panel-nav-color);
     border-right: 1px solid var(--border-color);
     transition: var(--tran-05);
 }
@@ -380,7 +392,7 @@ nav.close~.dashboard .top {
 }
 
 .boxes .box.box3 {
-    background-color: var(--box1-color);
+    background-color: var(--box3-color);
 }
 
 .dash-content .activity .activity-data {
@@ -534,7 +546,7 @@ nav.close~.dashboard .top {
 /*tabela*/
 table {
     border: 1px #c0c0c0 solid;
-    width: 100% !important;
+    width: 100%;
     margin-top: 2% !important;
     margin-bottom: 2% !important;
     border-radius: 12px;
@@ -545,7 +557,7 @@ table th {
     color: #fff;
     width: 250px !important;
     font-size: 1em;
-    border-radius: 12px;
+
 }
 
 table td {
@@ -560,4 +572,111 @@ input {
     margin-top: 2%;
     border-radius: 12px;
     margin-bottom: 2%;
+}
+
+nav#perfil {
+    width: 13% !important;
+    margin-top: 2.1%;
+    height: 7vh !important;
+    border-radius: 12px !important;
+    background-color: rgb(64, 107, 145);
+}
+
+.top {
+    height: 8vh !important;
+}
+
+div#tb_dados_filter {
+    display: none;
+}
+
+table#tb_dados {
+    cursor: pointer;
+}
+
+table#tb_dados {
+    width: 96% !important;
+    margin-left: 2%;
+    border-radius: 8px;
+}
+
+p#ajuste {
+    color: #fff;
+}
+
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+
+#mapid {
+    height: 350px;
+    width: 100%;
+}
+
+#mapid2 {
+    height: 170px;
+    width: 100%;
+}
+
+img#img_profile {
+    width: 90%;
+}
+
+table#tb_profile {
+    border: none;
+}
+
+.card {
+    background-color: var(--panel-card-color) !important;
+}
+
+.text-primary {
+    color: var(--text-card-color) !important;
+}
+
+.card-header {
+    background-color: var(--primary-card-color) !important;
+
+}
+
+.modal-content {
+    background-color: var(--color-fundo-modal) !important;
+
+}
+
+.tb_protocolo {
+    background-color: var(--color-fundo-modal) !important;
+    border: none;
+}
+
+.modal_txt_dados {
+    color: var(--text-modal-color) !important;
+}
+
+.button.blue {
+    background-color: var(--primary-color) !important;
+}
+
+.close {
+    opacity: .99 !important;
+}
+
+button#atualizaCadastro {
+    width: 100% !important;
+}
+
+span#infoSistema {
+    right: 0;
+    bottom: 0;
+    margin-right: 2%;
+    position: fixed;
+    font-size: 0.7em;
+}
+
+div#ajustemapa{
+    z-index: 5;
 }
