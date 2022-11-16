@@ -7,6 +7,7 @@ var idAtual = null;
 var longitude = null;
 var latitude = null;
 
+var usuario = localStorage.getItem('usuario');
 //Banco 1 padrao das tasks
 var firebaseConfig = {
     apiKey: "AIzaSyDtTxUWqB07R-ZvIA6V6SRvm1vbOuAMS2s",
@@ -48,6 +49,9 @@ function validaUsuarioLogado() {
             });
             const firstElement = list.shift();
             document.getElementById('nomeuser').innerHTML = firstElement.nome;
+            document.getElementById('nomeFuncTitle').innerHTML = firstElement.nome;
+
+
             //document.getElementById('areauser').innerHTML = firstElement.area;
             console.log(list)
         });
@@ -55,7 +59,7 @@ function validaUsuarioLogado() {
 }
 
 function contaPendentes() {
-    firestore.collection("Tasks").onSnapshot((query) => {
+    firestore.collection("Tasks").where("uidfunc", "==", usuario).onSnapshot((query) => {
         var list = [];
         query.forEach((doc) => {
             list.push({ ...doc.data(), id: doc.id });
@@ -67,7 +71,8 @@ function contaPendentes() {
 }
 
 function buscar() {
-    firestore.collection("Tasks").onSnapshot((query) => {
+    const usuario = localStorage.getItem('usuario');
+    firestore.collection("Tasks").where("uidfunc", "==", usuario).onSnapshot((query) => {
         var list = [];
         var conta = 1;
         query.forEach((doc) => {
@@ -129,11 +134,13 @@ $(document).ready(function () {
                         //document.getElementById("map").src = `https://www.google.com/maps/embed?pb=(${latitude},${longitude})`;
                         document.getElementById("map").src = `https://maps.google.com.br/maps?q=(${latitude},${longitude})&output=embed&dg=oo`
 
+                        document.getElementById('textData').innerHTML = dado.data;
                         document.getElementById('textProtocolo').innerHTML = idAtual;
                         document.getElementById('textStatus').innerHTML = dado.status;
                         document.getElementById('textTipo').innerHTML = dado.tipo;
                         document.getElementById('textUrgencia').innerHTML = dado.urgencia;
                         document.getElementById('textDescricao').innerHTML = dado.description;
+                        document.getElementById('textBaixa').innerHTML = dado.databaixa;
 
                         storage.ref(dado.image).getDownloadURL().then((url) => {
                             console.log(url);

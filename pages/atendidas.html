@@ -17,10 +17,15 @@
     <link rel="stylesheet" href="/../PortalSip/estilos/graficos/grafico-pie.css">
 
     <title>
-        Portal S.I.P - Total de Relatos
+        Portal S.I.P - ADM
     </title>
 </head>
 
+<style>
+    .name {
+        font-weight: bold !important;
+    }
+</style>
 
 <body>
     <nav>
@@ -36,7 +41,7 @@
             <ul class="nav-links">
                 <li title="Home"><a href="home.html">
                         <i class="uil uil-estate"></i>
-                        <span class="link-name"><b>HOME</b></span>
+                        <span class="link-name">HOME</span>
                     </a></li>
                 <li title="Administrativo"><a href="adm.html">
                         <i class="uil uil-bag-alt"></i>
@@ -60,7 +65,7 @@
 
                 <li title="Perfil"><a href="perfil.html">
                         <i class="uil-user-circle"></i>
-                        <span class="link-name" id="nomeuser"></span>
+                        <span class="link-name name" id="nomeuser"></span>
                     </a></li>
 
                 <li title="Logout"><a href="#">
@@ -103,8 +108,8 @@
             </div>
 
             <div class="title">
-                <i class="uil-map-marker-alt"></i>
-                <span class="text">Todos os relatos: <span class="number" id="pendentes">-</span></span>
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Relatos Atendidos: <span class="number" id="pendentes">-</span></span>
             </div>
 
 
@@ -113,7 +118,8 @@
 
                 <div class="card shadow mb-4 ajuste2">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Todos os Relatos
+                        <h6 class="m-0 font-weight-bold text-primary">Relatos Atendidos por: <span
+                                id="nomeFuncTitle">-</span>
                         </h6>
                     </div>
                     <div class="card-body">
@@ -156,6 +162,9 @@
                             <tr>
                                 <td class="modal_txt_dados">Descrição: <span id="textDescricao"></span></td>
                             </tr>
+                            <tr>
+                                <td class="modal_txt_dados">Atendida em: <span id="textBaixa"></span></td>
+                            </tr>
                         </table>
                     </td>
                 </tr>
@@ -183,6 +192,6 @@
 <script src="/../PortalSip/bibliotecas/jquery.popper.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="/../PortalSip/scripts/total.js"></script>
+<script src="/../PortalSip/scripts/atendidas.js"></script>
 
 </html>

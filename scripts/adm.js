@@ -44,7 +44,7 @@ const data2 = secondaryApp.firestore()
 function validaUsuarioLogado() {
     const usuario = localStorage.getItem('usuario');
     console.log(usuario);
-    if (usuario == null || usuario == "") {
+    if (usuario == null || usuario == "" || usuario == "deslogado") {
         window.location.assign("/PortalSip");
     } else {
         //document.getElementById('iduser').innerHTML = usuario;
@@ -131,6 +131,7 @@ $(document).ready(function () {
                         //document.getElementById("map").src = `https://www.google.com/maps/embed?pb=(${latitude},${longitude})`;
                         document.getElementById("map").src = `https://maps.google.com.br/maps?q=(${latitude},${longitude})&output=embed&dg=oo`
 
+                        document.getElementById('textData').innerHTML = dado.data;
                         document.getElementById('textProtocolo').innerHTML = idAtual;
                         document.getElementById('textStatus').innerHTML = dado.status;
                         document.getElementById('textTipo').innerHTML = dado.tipo;

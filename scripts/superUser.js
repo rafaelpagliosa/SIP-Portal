@@ -37,7 +37,7 @@ const data2 = secondaryApp.firestore()
 function validaUsuarioLogado() {
     const usuario = localStorage.getItem('usuario');
     console.log(usuario);
-    if (usuario == null || usuario == "") {
+    if (usuario == null || usuario == "" || usuario == "deslogado") {
         window.location.assign("/PortalSip");
     } else {
         //document.getElementById('iduser').innerHTML = usuario;
@@ -74,7 +74,7 @@ function buscarTotalUser() {
         });
         var dataSet = [];
         $.each(list, function (index, data) {
-            dataSet.push([data.posicao, data.id, data.nome, data.area, data.email, data.contato, data.iduser]);
+            dataSet.push([data.id, data.nome, data.area, data.email, data.contato, data.iduser]);
         });
 
         //criação da tabela via javascript
@@ -85,7 +85,6 @@ function buscarTotalUser() {
             info: false,
             bDestroy: true,
             columns: [
-                { title: 'Nº' },
                 { title: 'Id' },
                 { title: 'Nome' },
                 { title: 'area' },

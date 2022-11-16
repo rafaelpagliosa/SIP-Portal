@@ -36,7 +36,7 @@ const data2 = secondaryApp.firestore()
 function validaUsuarioLogado() {
     const usuario = localStorage.getItem('usuario');
     console.log(usuario);
-    if (usuario == null || usuario == "") {
+    if (usuario == null || usuario == "" || usuario == "deslogado") {
         window.location.assign("/PortalSip");
     } else {
         //document.getElementById('iduser').innerHTML = usuario;
@@ -223,7 +223,7 @@ function contaChamadosData() {
         tmn = list.length;
 
         for (i = 0; i < tmn; i++) {
-            var unixTimestamp = list[i].data;
+            var unixTimestamp = list[i].hora;
             var date = new Date(unixTimestamp * 1000);
             var mes = date.getMonth() + 1
             //console.log("Date: " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear());
@@ -363,11 +363,11 @@ function contaUrgencia() {
         var baixa = 0, media = 0, urgente = 0;
 
         for (i = 0; i < tmn; i++) {
-            if (list[i].urgencia == "urgente") {
+            if (list[i].urgencia == "urgente" || list[i].urgencia == "Urgente") {
                 urgente = urgente + 1;
-            } else if (list[i].urgencia == "media") {
+            } else if (list[i].urgencia == "media" || list[i].urgencia == "Média") {
                 media = media + 1;
-            } else if (list[i].urgencia == "baixa") {
+            } else if (list[i].urgencia == "baixa" || list[i].urgencia == "Baixa") {
                 baixa = baixa + 1;
             } else {
                 console.log("erro")

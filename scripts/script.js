@@ -42,7 +42,8 @@ function deslogar() {
 */
 function validaUsuarioLogado() {
     const usuario = localStorage.getItem('usuario');
-    if (usuario == null || usuario == "") {
+    console.log(usuario)
+    if (usuario == null || usuario == "" || usuario == "deslogado") {
         window.location.assign("/PortalSip");
     } else {
         data2.collection("SuperUser").where("iduser", "==", usuario).onSnapshot((query) => {
